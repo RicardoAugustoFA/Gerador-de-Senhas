@@ -6,31 +6,25 @@ let senha = document.querySelector("#senha");
 
 let container = document.querySelector("#container-senha");
 
-
 let charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-let novaSenha = "";
 
 tamanhoPassword.innerHTML = sliderElement.value;
-let senhas = "";
-    slider.oninput = function(){
-        tamanhoPassword.innerHTML = this.value;
+
+sliderElement.oninput = function () {
+    tamanhoPassword.innerHTML = this.value;
+}
+
+function gerarSenha() {
+    let novaSenha = "";  // Reinicia a variável a cada vez que a função é chamada
+
+    for (let i = 0, n = charset.length; i < sliderElement.value; i++) {
+        novaSenha += charset.charAt(Math.floor(Math.random() * n));
     }
 
-    function gerarSenha(){
+    container.classList.remove("hide");
+    senha.innerHTML = novaSenha;
+}
 
-         
-           
-        for ( let i = 0, n = charset.length; i < sliderElement.value; i++){
-            senhas += charset.charAt(Math.floor(Math.random() * n));
-
-        }
-        container.classList.remove("hide");
-        senha.innerHTML = senhas;
-    }   
-
-    function copiar(){
-        
-        navigator.clipboard.writeText(senhas);
-
-    }
-   
+function copiar() {
+    navigator.clipboard.writeText(senha.innerHTML);
+}
